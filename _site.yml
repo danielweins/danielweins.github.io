@@ -1,0 +1,14 @@
+name: Daniel Weinstein
+output_dir: "."
+navbar:
+  title: "My Beautiful Website"
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "GIS Work"
+      icon: fa-map-o
+      href: geog13.html
+output:
+  html_document:
+    theme: simplex

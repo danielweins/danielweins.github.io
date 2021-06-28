@@ -1,0 +1,9 @@
+---
+title: "About Me"
+---
+  
+<center>
+# Nice to meet you! <i class="fa fa-handshake-o fa-0.5x" style="color:maroon;"></i>
+</center>
+  
+I'm a second year student at UC Santa Barbara, studying [Geography](https://www.geog.ucsb.edu/) with emphasis in Geographic Information Science. I am currently working with the program R Studio and learning how to create projects such as this one. In my free time you can find me wandering down a YouTube black hole or playing the piano. Thanks for getting to know me!
