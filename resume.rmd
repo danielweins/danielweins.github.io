@@ -2,16 +2,14 @@
 title: "Resume - Daniel Weinstein"
 ---
 
-<center>
+
 # Education <i class="fa fa-mortar-board fa-0.5x" style="color:maroon;"></i>
-</center>
-  
+
   - University of California, Santa Barbara- 2020 to present. 
   - Crespi Carmelite High School- 2016-2020
   
-<center>
+
 # Experience <i class="fa fa-line-chart fa-0.5x" style="color:maroon;"></i>
-</center>
 
   - Waiter- CoCo Ichibanya Curry- June 2021 to present
   - Client Intake Worker- Bral & Associates- June-September 2020
