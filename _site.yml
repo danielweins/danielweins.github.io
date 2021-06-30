@@ -9,6 +9,9 @@ navbar:
     - text: "GIS Work"
       icon: fa-map-o
       href: geog13.html
+    - text: "Experience and Education"
+      icon: fa-pencil
+      href: resume.html
 output:
   html_document:
     theme: simplex
