@@ -5,7 +5,7 @@ navbar:
   left:
     - text: "Home"
       icon: fa-home
-      href: aboutme.html
+      href: index.html
     - text: "Geography 13"
       icon: fa-map-o
       href: geog13.html
