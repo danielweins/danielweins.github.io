@@ -1,8 +1,8 @@
 ---
-title: "Resume - Daniel Weinstein"
+name: "Daniel Weinstein"
 output_dir: "."
 navbar:
-  title: "Daniel Weinstein"
+  title: "Resume"
   left:
     - text: "Home"
       icon: fa-home
@@ -18,7 +18,6 @@ output:
   html_document:
     theme: simplex
 ---
-
 
 # Education <i class="fa fa-mortar-board fa-0.5x" style="color:maroon;"></i>
 

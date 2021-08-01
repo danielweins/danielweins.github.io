@@ -12,11 +12,11 @@ In the summer of 2021 I took a class GIS course based in R. I worte some code, a
 - This project has a github repo as well where you can see the code.
 - All of this was completed in R Studio. 
 
-[Lab1](link)
+[Lab1](lab-02.rmd)
 
 Description here
 
-[Lab2](link)
+[Lab2](lab-03 copy.rmd)
 
 description here
 
