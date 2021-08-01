@@ -5,16 +5,14 @@ navbar:
   left:
     - text: "Home"
       icon: fa-home
-      href: index.html
+      href: aboutme.html
     - text: "Geography 13"
       icon: fa-map-o
       href: geog13.html
     - text: "Resume"
       icon: fa-pencil
       href: resume.html
-    - text: "About Me"
-      icon: fa-angle-double-right
-      href: aboutme.html
+
 output:
   html_document:
     theme: simplex
