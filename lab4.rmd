@@ -1,0 +1,330 @@
+
+
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(tidyverse)
+library(sf)
+
+library(USAboundaries)
+library(knitr)
+library(gghighlight)
+library(ggplot2)
+library(leaflet)
+library(rmapshaper)
+library(dplyr)
+
+
+```
+
+
+# Question 1
+
+```{r}
+# 1.1
+
+counties <- USAboundaries::us_counties()%>%
+  filter(!state_name %in% c("Hawaii", "Puerto Rico", "Alaska", "Guam")) %>%
+  st_transform(5070) %>% st_as_sf
+
+# 1.2
+
+centroids <- counties %>% st_centroid()
+nrow(centroids)
+
+cent_union <- centroids %>% st_union()
+cent_union
+
+```
+
+
+
+```{r}
+# 1.3, 1.4
+
+# Grid
+sq_grid = st_make_grid(counties, n = c(70)) %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+plot_tess = function(sq_grid, title){
+  ggplot() + 
+    geom_sf(data = data, fill = "white", col = "blue", size = .2) +   
+    theme_void() +
+    labs(title = title, caption = paste("Square Grid", nrow(data) )) +
+    theme(plot.title = element_text(hjust = .5, color =  "navy", face = "bold")) }
+
+# Triangulated Tessellation
+t_grid = st_triangulate(counties) %>% 
+  st_cast() %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+plot_tess = function(t_grid, title){
+  ggplot() + 
+    geom_sf(data = data, fill = "white", col = "blue", size = .2) +   
+    theme_void() +
+    labs(title = title, caption = paste("Triangulated", nrow(data) )) +
+    theme(plot.title = element_text(hjust = .5, color =  "navy", face = "bold")) }
+  
+# Hexagonal Grid
+  
+hex_grid = st_make_grid(counties, n = c(70), square = FALSE) %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+plot_tess = function(hex_grid, title){
+  ggplot() + 
+    geom_sf(data = data, fill = "white", col = "blue", size = .2) +   
+    theme_void() +
+    labs(title = title, caption = paste("Hexagonal", nrow(data) )) +
+    theme(plot.title = element_text(hjust = .5, color =  "navy", face = "bold")) }
+
+# Voronoi Tessellation
+
+v_grid = st_voronoi(counties) %>% 
+  st_cast(x, "POINT") %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+plot_tess = function(v_grid, title){
+  ggplot() + 
+    geom_sf(data = data, fill = "white", col = "blue", size = .2) +   
+    theme_void() +
+    labs(title = title, caption = paste("Voronoi", nrow(data) )) +
+    theme(plot.title = element_text(hjust = .5, color =  "navy", face = "bold")) }
+
+v_grid = st_intersection(v_grid, st_union(counties))
+plot_tess(v_grid, "Voronoi") + 
+  geom_sf(data = south_cent, col = "darkred", size = .2)
+
+boundary <- counties %>% st_union() %>% ms_simplify(keep = 0.25)
+counties = st_union(counties)
+
+```
+
+
+```{r}
+# Step 1.5
+
+library(rmapshaper)
+
+rmapshaper::ms_simplify(keep = 0.25)
+  mapview::npts
+  st_intersection
+  
+name = sum_tess(st_voronoi, 5) 
+v_grid = st_voronoi(cent_union) %>% 
+  st_cast() %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+name = sum_tess(st_triangulate, 5) 
+v_grid = st_triangulate(cent_union) %>% 
+  st_cast() %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+name = sum_tess(st_make_grid, 5) 
+v_grid = st_make_grid(cent_union) %>% 
+  st_cast() %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+name = sum_tess(st_make_grid, 5) 
+v_grid = st_make_grid(cent_union) %>% 
+  st_cast() %>% 
+  st_as_sf() %>% 
+  mutate(id = 1:n())
+
+```
+
+```{r}
+# Step 1.6, 1.7
+
+Tessplot = function(st_make_grid, Square) {
+
+ ggplot() +
+    geom_sf(data= st_make_grid, aes(fill=n), size= .2, col= "white") +
+    scale_fill_viridis_c() +
+    them_void() + 
+    labs(title = Tessellations, caption=(data$id))
+  
+}
+
+Tessplot = function(st_voronoi, Voronoi) {
+
+ ggplot() +
+    geom_sf(data= st_make_grid, aes(fill=n), size= .2, col= "white") +
+    scale_fill_viridis_c() +
+    them_void() + 
+    labs(title = Tessellations, caption=(data$id))
+  
+}
+
+Tessplot = function(st_triangulate, Triangulated) {
+
+ ggplot() +
+    geom_sf(data= st_triangulate, aes(fill=n), size= .2, col= "white") +
+    scale_fill_viridis_c() +
+    them_void() + 
+    labs(title = Tessellations, caption=(data$id))
+  
+}
+
+Tessplot = function(st_voronoi, Hexagonal) {
+
+ ggplot() +
+    geom_sf(data= st_voronoi, aes(fill=n), size= .2, col= "white") +
+    scale_fill_viridis_c() +
+    them_void() + 
+    labs(title = Tessellations, caption=(data$id))
+  
+}
+
+```
+
+```{r}
+# Question 2.1 
+
+summarize_tess <- function(data, description) {
+  area = st_area(data)
+  area = set_units(area, "km^2")
+  area = as.numeric(area)
+  data.frame(Attributes = c("Text from Arg2", "Number of Features", "Mean area of features (km squared)", "Standard Deviation", "Total Area"))
+}
+
+# 2.2
+summarize_tess(voronoi, "County Centroids")
+
+# 2.3 
+tess_summary = bind_rows(
+  summarize_tess(triangulation ,"Triangulated"),
+  summarize_tess(voronoi, "Voronoi"))
+
+# 2.4
+knitr::kable(summarize_tess, caption = "Table")
+
+
+
+```
+# 2.5: Gridded arrangements are laid out in tile-like formations and are the simplest form of a tessellation. This arrangement may lead to spatial data appearing more linear and "simple". The Hexagonal tessellation causes the data to appear more distorted, and may be slightly harder to recognize. In class, the concept of Gerrymandering was discussed in the way that irregular shapes may cause a region to appear larger or occupy more units while theoretically taking up the same amount of space. For this reason, the voronoi tessellation (with more rounded corners) often appears more prominently than triangulated regions, which are made up of more extreme, sharpened corners. 
+
+
+# Question 3
+
+```{r}
+greeting <- function (name){
+  cat("Hi! My name is", name)
+}
+
+greeting("Daniel")
+```
+
+```{r}
+
+# Question 3.1
+
+library(readxl)
+NID <- read_excel("../data/NID2019_U.xlsx") %>%
+  filter(!is.na(LONGITUDE)) %>%
+  filter(!is.na(LATITUDE)) %>%
+  st_as_sf(coords=c("LONGITUDE" , "LATITUDE"), crs=4326) %>%
+  st_transform(5070)
+
+NID
+```
+
+
+```{r}
+
+# Question 3.2 
+
+PIP <- function(points, polygons, id){
+  st_join(polygons, points) %>%
+    dplyr::count(.data[[id]])
+}
+
+PIP(NID, 'voronois', 'id')
+
+st_crs(NID)
+
+polygons = voronois
+points = NID
+DAM_NAME <- st_join(polygons, points) %>% dplyr::count(get('id'))
+DAM_NAME
+
+```
+
+
+```{r}
+# Question 3.4 
+
+plot_PIP<- function(data, title){
+  ggplot() +
+    geom_sf(data=data, aes(fill=n), size=.2, col=NA) +
+    scale_fill_viridis_c() +
+    theme_void() + 
+    labs(title = title, caption=(data$id))
+}
+
+plot_PIP(id, "Voronoi Tessellation")
+
+# Question 3.5
+
+sq_pip = point_in_polygon(counties, sq_grid, "id")
+plot(sq_pip['Square Grid'], border = NA, key.pos = 4)
+
+hex_pip = point_in_polygon(cities, hex_grid, "id")
+plot(hex_pip['Hexagonal'], border = NA,  key.pos = 4)
+
+v_pip = point_in_polygon(cities, v_grid, "id")
+plot(v_pip['Voronoi Tessellation'], border = NA, key.pos = 4)
+
+t_pip = point_in_polygon(cities, t_grid, "id")
+plot(t_pip['Triangulated'], border = NA, key.pos = 4)
+
+```
+
+# Question 3.6 The Visualization of tessellations is related to the MAUP problem because the difference in sizes and characteristics of each type of tessellation may reflect a difference in any color/quantity shown in each tile. I will be choosing voronoi tessellation because the irregular-shaped tiles lack sharp corners (meaning that boundaries won't be quite as "shoved together") and also it seems to me like this shape would be most reflective of the layout of US counties.  
+
+```{r}
+
+# Question 4
+
+library(gghighlight)
+
+readxl::read_xlsx("..data/NID2019_U.xslx")
+
+PIP <- function(points, polygons, id){
+  st_join(polygons, points, R) %>%
+  dplyr::filter(.data[[R]]) +
+  gghighlight()
+  
+PIP <- function(points, polygons, id){
+  st_join(polygons, points) %>%
+  dplyr::filter(.data[[C]]) +
+  gghighlight()
+  
+PIP <- function(points, polygons, id){
+  st_join(polygons, points) %>%
+  dplyr::filter(.data[[P]]) +
+  gghighlight()
+  
+PIP <- function(points, polygons, id){
+  st_join(polygons, points) %>%
+  dplyr::filter(.data[[S]]) +
+  gghighlight()
+  
+grepl("R", "C", "P", "S", dams2$PURPOSES[1:5])
+
+}
+
+
+
+```
+
+
+
+

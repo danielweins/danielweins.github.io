@@ -1,0 +1,124 @@
+---
+title: "Lab 2"
+author: "Daniel Weinstein"
+date: "June 11, 2021"
+output: 
+  html_document:
+    theme: darkly
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(warning = FALSE, message = FALSE, out.width = "75%", fig.align = 'center')
+```
+
+
+```{r setup}
+
+library(tidyverse)
+library(readr)
+library(zoo)
+library(readxl)
+```
+
+# Lab 2 Geog 13
+
+```{r echo= TRUE}
+PopulationEstimates_1_ <- readxl("../data/PopulationEstimates (1).xls", skip = 2)
+
+p2 = PopulationEstimates_1_ %>%
+  select(fips = FIPStxt, state = State, Area_Name, pop2019 = POP_ESTIMATE_2019) %>%
+  group_by(state) %>%
+  slice_max(pop2019, n = 1)
+
+summary(p2)
+str(p2)
+
+```
+
+
+## Question 1
+
+```{r cache=TRUE}
+home = read_csv("https://raw.githubusercontent.com/nytimes/covid-19-data/master/us-counties.csv")
+```
+
+
+
+```{r}
+
+
+# Table 1 & 2: Counties with Most Cumulative Cases 
+
+us_counties <- read_csv("../data/us-counties.csv")
+
+p2 = us_counties %>%
+  select(fips, county, state, date, cases) %>%
+  group_by(county) %>%
+  summarise(cumulativeCases = sum(cases)) %>%
+  ungroup() %>%
+  slice_max(cumulativeCases, n = 5)
+
+knitr::kable(p2, caption = "Counties with the most cumulative cases", col.names = c("county", "cases"))
+
+
+
+# Most Cumulative Cases Per Capita
+
+PopulationEstimates_1_ <- read_excel("../data/PopulationEstimates (1).xls", skip = 2)
+us_counties <- read_csv("../data/us-counties.csv")
+
+p2 = us_counties %>%
+  filter(date == max(date)) %>%
+  summarise(cumulativeCases = sum(cases)) %>%
+  mutate(percapita = cumulativeCases / PopulationEstimates_1_) %>%
+  select(county, percapita) %>%
+  group_by(county) %>%
+  slice_max(percapita, n = 5)
+  
+knitr::kable(p2, caption = "Counties with the most Cumulative Cases Per Capita")
+
+# Table 2: 5 Counties with most new cases
+
+p1 = us_counties %>%
+  select(state, county, date, cases) %>%
+  group_by(county) %>%
+  summarize(DailyNewCases = sum(cases)) %>%
+  ungroup() %>%
+  slice_max(DailyNewCases, n = 5)
+
+knitr::kable(p1, caption = "Counties with the Most New Cases")
+
+p1
+
+```
+
+#### Question 2: 
+
+```{r}
+
+
+p1 = home %>%
+  filter(state %in% c("NY", "CA", "LA", "FL")) %>%
+  group_by(state, date) %>%
+  summarize(stateCases = sum(cases)) %>%
+  mutate(DailyNewCases = stateCases - lag(stateCases),
+         rollmean = zoo::rollmean(stateCases))  %>% ungroup()
+  
+p1 %>% ggplot(aes(x = date, y = DailyNewCases)) +
+  geom_col(aes(col = state)) +
+  geom_line(aes())
+  facet_wrap(~state, scale = "free_y", ncol = 1) +
+  labs(title = "New Daily Cases",
+       subtitle = "From New York Times Data",
+       x = "Date",
+       y = "Cases",
+       caption = "Lab 2, GEOG 13")
+  
+```
+
+
+# Scaling the population allowed us to get a "summary" of the cases within the past week, but to an extent it disguised the data from some states. For example, states with smaller populations were scaled smaller which means that they appeared to have fewer cases, even though the proportion of Covid-19 cases to the total population may have been much larger than in a highly populated state like California or New York. 
+
+```{r setup, include=FALSE}
+(eval = FALSE)
+```
