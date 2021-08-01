@@ -14,7 +14,7 @@ navbar:
       href: resume.html
     - text: "About Me"
       icon: fa-angle-double-right
-      href: aboutme.rmd
+      href: aboutme.html
 output:
   html_document:
     theme: simplex
