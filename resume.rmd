@@ -1,5 +1,22 @@
 ---
 title: "Resume - Daniel Weinstein"
+output_dir: "."
+navbar:
+  title: "Daniel Weinstein"
+  left:
+    - text: "Home"
+      icon: fa-home
+      href: index.html
+    - text: "Geography 13"
+      icon: fa-map-o
+      href: geog13.html
+    - text: "Resume"
+      icon: fa-pencil
+      href: resume.html
+      
+output:
+  html_document:
+    theme: simplex
 ---
 
 
