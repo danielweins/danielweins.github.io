@@ -11,6 +11,7 @@ title: "Resume - Daniel Weinstein"
 
 # Experience <i class="fa fa-line-chart fa-0.5x" style="color:maroon;"></i>
 
+  - Data Collection- Santa Barbara Multi-Use Path Study- June 2021 to present
   - Waiter- CoCo Ichibanya Curry- June 2021 to present
   - Client Intake Worker- Bral & Associates- June-September 2020
   - Office Assistant- Heritage Book shop- January 2018-January 2020

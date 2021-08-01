@@ -12,3 +12,19 @@ In the summer of 2021 I took a class GIS course based in R. I worte some code, a
 - In this assignment I built a website to show my GIS Work 
 - This project has a github repo as well where you can see the code.
 - All of this was completed in R Studio. 
+
+[Lab1](link)
+
+Description here
+
+[Lab2](link)
+
+description here
+
+[Lab3](link)
+
+description here
+
+[Lab4](link)
+
+description here
