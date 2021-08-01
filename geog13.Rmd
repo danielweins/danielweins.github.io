@@ -1,29 +1,29 @@
 ---
 title: "Geography 13"
 ---
-
-In the summer of 2021 I took a class GIS course based in R. I worte some code, and did some cool data science. Here is a collection of links! 
-   
    
  
-## [Building a project website]() <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
+## [Lab 1]() <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
 
 - In this assignment I built a website to show my GIS Work 
 - This project has a github repo as well where you can see the code.
 - All of this was completed in R Studio. 
 
-[Lab1](lab-02.rmd)
+## [Lab2](lab-02.rmd) <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
 
-Description here
+- In this lab, I practiced reading in COVID-19 data from the New York Times
+- I figured out how to join two data sets in order to display the data in a variety of ways. 
+- I also learned how to manipulate the data and express my results as a plotted graph or table. 
 
-[Lab2](lab-03 copy.rmd)
+## [Lab3](lab-03 copy.rmd)
 
-description here
+- In Lab 3, I calculated the distance from US cities to the United States Border and neighboring countries. 
+- I became more familiar with utilizing MULTIPOLYGON and MULTILINESTRING geometries. 
+- Although the sf package was hard to download due to slow internet, I was eventually able to get it downloaded so that I could familiarize myself with the features within sf.
 
-[Lab3](link)
+## [Lab4](link)
 
-description here
-
-[Lab4](link)
-
-description here
+- This lab was tricky!
+- Despite numerous challenges, I was able to become more comfortable making voronoi and triangulated tessellations, as well as square and hexagonal grids. 
+- This is useful because it allows for numerous ways to spatially display data on a map, and do so in a way that doesn't gerrymander the data into awkward portions of a given region. 
+- I also practiced using point-in-polygons and grepl to show data on US dams and their main uses. 
