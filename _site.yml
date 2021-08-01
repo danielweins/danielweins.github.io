@@ -12,7 +12,7 @@ navbar:
     - text: "Resume"
       icon: fa-pencil
       href: resume.html
-    - text: "Geography W12"
+    - text: "GEOG W12"
       icon: fa-map-o
       href: geogw12.html
 
