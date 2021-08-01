@@ -1,7 +1,7 @@
 name: "Daniel Weinstein"
 output_dir: "."
 navbar:
-  title: "My Beautiful Website"
+  title: "Daniel Weinstein"
   left:
     - text: "Home"
       icon: fa-home
@@ -9,7 +9,7 @@ navbar:
     - text: "Geography 13"
       icon: fa-map-o
       href: geog13.html
-    - text: "Experience and Education"
+    - text: "Resume"
       icon: fa-pencil
       href: resume.html
     - text: "About Me"
