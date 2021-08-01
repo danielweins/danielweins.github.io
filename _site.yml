@@ -6,12 +6,15 @@ navbar:
     - text: "Home"
       icon: fa-home
       href: index.html
-    - text: "GIS Work"
+    - text: "Geography 13"
       icon: fa-map-o
       href: geog13.html
     - text: "Experience and Education"
       icon: fa-pencil
       href: resume.html
+    - text: "About Me"
+      icon: fa-angle-double-right
+      href: aboutme.rmd
 output:
   html_document:
     theme: simplex
