@@ -1,7 +1,7 @@
 name: "Daniel Weinstein"
 output_dir: "."
 navbar:
-  title: "My Beautiful Websites"
+  title: "Daniel Weinstein"
   left:
     - text: "Home"
       icon: fa-home
