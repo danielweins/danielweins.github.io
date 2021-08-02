@@ -5,7 +5,12 @@ title: "Geography 13"
 <center>
 # Nice to meet you! <i class="fa fa-handshake-o fa-0.5x" style="color:maroon;"></i>
 </center>
-  
+
+<center>
+
+![](finalpic3.png)
+
+</center>
 
 I'm a second year student at UC Santa Barbara, studying [Geography](https://www.geog.ucsb.edu/) with emphasis in Geographic Information Science. In my free time you can find me wandering down a YouTube black hole or playing the piano. 
 
