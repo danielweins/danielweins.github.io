@@ -1,7 +1,7 @@
 name: "Daniel Weinstein"
 output_dir: "."
 navbar:
-  title: "Daniel Weinstein"
+  title: "My Beautiful Websites"
   left:
     - text: "Home"
       icon: fa-home
@@ -9,13 +9,12 @@ navbar:
     - text: "Geography 13"
       icon: fa-map-o
       href: geog13.html
-    - text: "Resume"
+    - text: "Experience and Education"
       icon: fa-pencil
       href: resume.html
-    - text: "GEOG W12"
-      icon: fa-map-o
-      href: geogw12.html
-
+    - text: "About Me"
+      icon: fa-angle-double-right
+      href: aboutme.rmd
 output:
   html_document:
     theme: simplex

@@ -9,19 +9,19 @@ title: "Geography 13"
 - This project has a github repo as well where you can see the code.
 - All of this was completed in R Studio. 
 
-## [Lab2](lab-02.html) <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
+## [Lab2](lab-02.rmd) <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
 
 - In this lab, I practiced reading in COVID-19 data from the New York Times
 - I figured out how to join two data sets in order to display the data in a variety of ways. 
 - I also learned how to manipulate the data and express my results as a plotted graph or table. 
 
-## [Lab3](lab-03 copy.html)
+## [Lab3](lab-03 copy.rmd) <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
 
 - In Lab 3, I calculated the distance from US cities to the United States Border and neighboring countries. 
 - I became more familiar with utilizing MULTIPOLYGON and MULTILINESTRING geometries. 
 - Although the sf package was hard to download due to slow internet, I was eventually able to get it downloaded so that I could familiarize myself with the features within sf.
 
-## [Lab4](lab4.html)
+## [Lab4](lab4.rmd) <i class="fa fa-laptop fa-0.5x" style="color:maroon;"></i> 
 
 - This lab was tricky!
 - Despite numerous challenges, I was able to become more comfortable making voronoi and triangulated tessellations, as well as square and hexagonal grids. 
